@@ -1,0 +1,31 @@
+.primary-pop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 8888888; 
+    padding: 1rem;
+}
+
+.primary-pop__container {
+    min-width: 350px;
+    width: 750px;
+    max-width: 900px !important;
+    overflow-y: auto;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: white;
+    border: 1px solid #dee2e6;
+}
+
+.primary-pop__header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}

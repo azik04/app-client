@@ -1,0 +1,22 @@
+.map-predicate{
+    position: absolute;
+    background-color: white;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    z-index: 200;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.map-predicate li{
+    padding: 12px;
+    cursor: "pointer";
+    transition: 0.3s;
+}
+
+.map-predicate li:hover{
+    background-color: #f1f3f5;;
+}

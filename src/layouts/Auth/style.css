@@ -1,0 +1,36 @@
+.auth {
+    min-height: 100vh;
+    padding: 0.25rem;
+    gap: 0.25rem;
+    display: flex;
+}
+
+.auth__image {
+    flex: 1;
+}
+
+.auth__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.auth__content {
+    width: 600px;
+    max-width: 100%;
+    display: flex;
+}
+
+.auth__box {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .auth__image-wrapper {
+        display: none;
+    }
+
+    .auth__content {
+        width: 100%;
+    }
+}

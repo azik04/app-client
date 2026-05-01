@@ -1,0 +1,24 @@
+.main {
+  background-color: var(--color-main-light) ;
+  display: flex;
+  flex-direction: column;
+  margin-left: 235px;
+  border-radius: 0.5rem;
+  flex-grow: 1;
+  gap: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .main {
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
+.section {
+  background-color: var(--color-secondary-light) !important;
+  border: 1px solid var(--color-border-light);
+  flex-grow: 1;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}

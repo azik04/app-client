@@ -1,0 +1,102 @@
+/* Profile Card */
+
+.profile-card {
+    background: #fff;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-border);
+    position: relative;
+}
+
+.profile-edit {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-avatar {
+    width: 200px;
+    border-radius: 0.25rem;
+    height: 200px;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+}
+
+.profile-main {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-main li {
+  margin-bottom: 8px;
+}
+
+.profile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-sub {
+    margin: 0;
+    font-size: 13px;
+    color: #777;
+}
+
+.rating {
+    background: #f4f4f4;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.profile-tags {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.profile-tags span {
+    font-size: 12px;
+    padding: 4px 8px;
+    background: #f6f6f6;
+    border-radius: 999px;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: 1rem;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-primary {
+    flex: 1;
+    background: #111;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.btn-secondary {
+    flex: 1;
+    background: #f2f2f2;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+}

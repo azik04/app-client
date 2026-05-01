@@ -1,0 +1,85 @@
+.admin-users {
+    padding: 1.5rem;
+}
+
+/* CARD */
+.admin-users__card {
+    background: #fff;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* HEADER */
+.admin-users__header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.admin-users__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* TABLE */
+.admin-users__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-users__thead {
+    background: #f8f9fa;
+}
+
+.admin-users__row {
+    border-bottom: 1px solid #eee;
+}
+
+.admin-users__row:hover {
+    background: #fafafa;
+}
+
+.admin-users__cell {
+    padding: 0.75rem;
+}
+
+.admin-users__cell--index {
+    font-weight: 600;
+}
+
+.admin-users__cell--muted {
+    color: #777;
+}
+
+/* ACTIONS */
+.admin-users__actions {
+    text-align: right;
+}
+
+.admin-users__actions-header {
+    text-align: right;
+}
+
+/* BUTTON */
+.admin-users__button {
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.4rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.admin-users__button--danger {
+    color: #dc3545;
+    border-color: #dc3545;
+    background: transparent;
+}
+
+.admin-users__button--danger:hover {
+    background: #dc3545;
+    color: white;
+}
+
+/* FOOTER */
+.admin-users__footer {
+    margin-top: 1rem;
+}

@@ -1,0 +1,8 @@
+/* Footer */
+.bg-footer {
+  background-color: var(--color-secondary-light) !important;
+  color: var(--color-text-muted);
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border-light);
+  padding: 0.5rem;
+}

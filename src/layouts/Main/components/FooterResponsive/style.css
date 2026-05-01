@@ -1,0 +1,23 @@
+/* Footer-Responsive */
+.bg-footer__responsive{
+  position: fixed;
+  bottom: 0.3rem;
+  width: calc(100% - 0.5rem);
+  background-color: var(--color-secondary-light) !important;
+  color: var(--color-text-muted);
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  padding: 0.5rem;
+}
+
+.footer-link {
+  background-color: var(--color-nav-bg) !important;
+  color: var(--color-sidebar-bg) !important;
+  border-radius: 0.375rem;
+}
+
+.footer-link:hover,
+.footer-link.active {
+  background-color: var(--color-text-dark) !important;
+  color: var(--color-main-bg) !important;
+}
