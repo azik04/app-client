@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import "./style.css"
 
 const ConfirmMail = () => {
     const navigate = useNavigate();
@@ -21,28 +22,24 @@ const ConfirmMail = () => {
     }
 
     useEffect(() => {
-        put()
-    }, [])
+        if (!userId || !token) {
+            navigate("/auth");
+            return;
+        }
 
+        put();
+    }, [userId, token]);
+    
     return (
-        <div class="app-container d-flex">
+        <div className='asset'>
+            <div class="asset-container">
+                <i className="fa-solid fa-circle-check mb-3"></i>
 
-            <section class="bg-section d-flex align-items-center justify-content-center">
-                <div class="bg-white p-4 rounded border text-center">
-                    <i
-                        className="fa-solid fa-circle-check fa-6x mb-4"
-                        style={{
-                            color: "rgba(0, 128, 0, 0.5)",
-                            display: "block",
-                            margin: "0 auto"
-                        }}
-                    ></i>
-                    <p className="fs-2 fw-semibold">Your email confirmed</p>
-                    <p className="fs-4">The account and subscription have been <br /> successfully created, you can <br /> now log into your account.</p>
-                    <a href="/auth" class="btn btn-lg btn-dark">Go to Auth</a>
-                </div>
-            </section>
+                <p className="fs-2 fw-semibold mb-3">Your email confirmed</p>
 
+                <p className="fs-6 mb-3">The account and subscription have been <br /> successfully created, you can <br /> now log into your account.</p>
+                <a href="/auth" class="btn btn-dark w-50">Go to Auth</a>
+            </div>
         </div>
     )
 }

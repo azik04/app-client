@@ -12,6 +12,9 @@ import CheckMail from "./features/Auth/CheckMail";
 import ConfirmMail from "./features/Auth/ConfirmMail";
 import Profile from "./features/Profile/Profile";
 import Admin from "./features/Admin/Admin";
+import ChatBot from "./features/Bot";
+import Job from "./features/Job/Job";
+import JobInfo from "./features/JobInfo/JobInfo";
 
 const App = () => {
     return (
@@ -23,6 +26,7 @@ const App = () => {
                     <Route path="forgot-password" element={<ForgotPassword />} />
                     <Route path="reset-password" element={<ResetPassword />} />
                 </Route>
+                <Route path="bot" element={<ChatBot />} />
 
                 <Route path="auth/check-mail" element={<CheckMail />} />
                 <Route path="auth/confirm-mail" element={<ConfirmMail />} />
@@ -34,6 +38,8 @@ const App = () => {
                 <Route path="/" element={<MainLayout />}>
                     <Route index element={<Profile />} />
                     <Route path="/Admin" element={<Admin />} />
+                    <Route path="/Job" element={<Job />} />
+                    <Route path="/Job/:jobId" element={<JobInfo />} />
                 </Route>
 
                 <Route path="*" element={<NotFound />} />

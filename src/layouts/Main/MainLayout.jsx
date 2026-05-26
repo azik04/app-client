@@ -10,15 +10,15 @@ const MainLayout = () => {
         <>
             <Aside />
 
-            <main className="main">
+            <seaction className="main">
                 <Nav />
 
-                <section className="section">
+                <main className="section">
                     <Outlet />
-                </section>
+                </main>
 
                 <Footer />
-            </main>
+            </seaction>
     
             <FooterResponsive />
         </>

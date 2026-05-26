@@ -1,0 +1,27 @@
+.asset {
+    width: 100%;
+    height: calc(100vh - 0.5rem);
+    background-color: var(--color-secondary-light);
+    border-radius: 0.25rem;
+    border: 1px solid var(--color-border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.asset-container {
+    background-color: var(--color-main-light);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    border: 1px solid var(--color-border-light);
+}
+
+.asset-container__image{
+    width: 220px;
+}
+
+.asset-container i{
+    font-size: 80px;
+    color: rgb(29, 156, 29);
+}

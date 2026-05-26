@@ -3,13 +3,12 @@
   background-color: var(--color-secondary-light) !important;
   border: 1px solid var(--color-border-light);
   border-radius: 0.5rem;
-  padding: 0.5rem;
-}
+  padding: 0.5rem;}
 
 .circle-photo {
-  border-radius: 100%;
-  width: 30px;
-  height: 30px;
+  border-radius: 0.5rem;
+  width: 33px;
+  height: 33px;
   object-fit: cover;
   border: 1px solid var(--color-border-light);
 }
@@ -17,4 +16,8 @@
 .nav-profile {
   margin-left: auto;
   align-items: center;
+}
+
+.nav-profile__image{
+  cursor: pointer;
 }

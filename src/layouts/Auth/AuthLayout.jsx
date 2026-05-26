@@ -20,7 +20,10 @@ const AuthLayout = () => {
                     </div>
 
                     <Outlet />
-
+                    
+                    <div className="text-center mt-3">
+                        <span className="text-secondary">Hüquqlarınız qorunur</span>
+                    </div>
                 </div>
             </div>
 

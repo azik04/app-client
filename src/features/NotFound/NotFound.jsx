@@ -1,15 +1,16 @@
+import { useNavigate } from 'react-router-dom';
+import './style.css'
+
 const NotFound = () => {
+    const navigate = useNavigate()
+
     return (
-        <div class="app-container d-flex">
-
-            <section class="bg-section d-flex align-items-center justify-content-center">
-                <div class="bg-white p-4 rounded border text-center">
-                    <p className="fs-1">404</p>
-                    <p className="fs-3">Oops! Page not found.</p>
-                    <a href="/" class="btn btn-dark">Go Home</a>
-                </div>
-            </section>
-
+        <div className='asset'>
+            <div class="asset-container">
+                <p className="fs-1 mb-2">404</p>
+                <p className="fs-3 mb-3">Oops! Page not found.</p>
+                <button type='button' onClick={() => navigate("/")} class="btn btn-dark">Go Home</button>
+            </div>
         </div>
     )
 }

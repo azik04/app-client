@@ -39,7 +39,7 @@ const Card = ({ data, fetchData }) => {
             </div>
 
             {updateUser && (
-                <PrimaryPop header="Create Address" onClose={() => setCreateAddress(false)}>
+                <PrimaryPop header="Create Address" onClose={() => setUpdateUser(false)}>
                     <UpdateUser onClose={() => setUpdateUser(false)} fetchData={fetchData} />
                 </PrimaryPop>
             )}
