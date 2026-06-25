@@ -1,0 +1,18 @@
+.job-actions{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.job-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    margin-bottom: 1.25rem;
+    background-color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+}

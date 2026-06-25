@@ -44,7 +44,7 @@ const SignUp = () => {
 
                 <Input col="col-6" labelFor="passsword" label="Passsword" id="passsword" type="passsword" onChange={e => setPassword(e.target.value)} name="password" placeholder="Enter your passsword" error={errors.Password?.[0]} />
 
-                <Select col="col-12" label="Select the Role" id="role" name="Role" value={role} onChange={e => setRole(Number(e.target.value))} options={[{ value: 1, label: "Client" }, { value: 2, label: "Worker" }]} error={errors.Role?.[0]} />
+                <Select col="col-12" label="Select the Role" id="role" name="Role" value={role} onChange={e => setRole(Number(e.target.value))} options={[{ id: 1, name: "Client" }, { id: 2, name: "Worker" }]} error={errors.Role?.[0]} />
 
                 {role === 2 && (<Input col="col-12" labelFor="pin" label="Pin" id="pin" type="text" onChange={e => setPin(e.target.value)} name="pin" placeholder="Enter your pin code" error={errors.Pin?.[0]} />)}
 

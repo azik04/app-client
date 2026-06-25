@@ -2,7 +2,7 @@ import axios from "axios";
 import { notify } from "./notificationService";
 
 const api = axios.create({
-    baseURL: "http://localhost:5221/api/v1/"
+    baseURL: "http://10.200.17.141:5221/api/v1/"
 })
 
 api.interceptors.request.use((config) => {

@@ -1,22 +1,32 @@
-import { getUserId } from "../../services/jwtService";
+import { getWorkerId, getClientId, getUserRole } from "../../services/jwtService";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 import Card from "./components/Card/Card";
 import AddressList from "./components/AddressList/AddressList";
+import History from "./components/History/History";
 
 const Profile = () => {
     const [data, setData] = useState({});
 
     const fetchData = async () => {
-        const clientId = getUserId()
+        const role = getUserRole();
 
         try {
-            const res = await api.get(`Account/id/${clientId}`)
-            setData(res.data.data)
+            if (role === "Client") {
+                const clientId = getClientId()
+                const res = await api.get(`Client/id/${clientId}`);
+                setData(res.data.data);
+            }
+            else if (role === "Worker") {
+                const workerId = getWorkerId()
+                const res = await api.get(`Worker/id/${workerId}`);
+
+                setData(res.data.data);
+            }
         } catch (error) {
             console.error("Fetch error:", error);
         }
-    }
+    };
 
     useEffect(() => {
         fetchData()
@@ -26,9 +36,11 @@ const Profile = () => {
         <div className="container">
             <Card data={data} fetchData={fetchData} />
 
-            <AddressList/>
+            <AddressList />
+
+            <History />
         </div>
-        
+
     )
 }
 

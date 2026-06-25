@@ -1,18 +1,22 @@
 .main {
-  background-color: var(--color-main-light) ;
-  display: flex;
-  flex-direction: column;
-  margin-left: 235px;
-  border-radius: 0.5rem;
-  flex-grow: 1;
-  gap: 0.25rem;
+    background-color: var(--color-main-light) ;
+    display: flex;
+    flex-direction: column;
+    margin-left: 235px;
+    border-radius: 0.5rem;
+    flex-grow: 1;
+    gap: 0.25rem;
 }
 
 @media (max-width: 768px) {
-  .main {
-    width: 100%;
-    margin-left: 0px;
-  }
+    .main {
+      width: 100%;
+      margin-left: 0px;
+    }
+
+    .section{
+      margin-bottom: 3.75rem;
+    }
 }
 
 .section {

@@ -1,0 +1,8 @@
+.map-reader {
+    padding: 1.25rem;
+    border-radius: 1.5rem;
+    background: #fff;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
+}

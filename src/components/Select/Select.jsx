@@ -9,16 +9,20 @@ const Select = ({ col, label, id, name, value, onChange, options = [], error }) 
                     Select something
                 </option>
 
-                {options.map((option, index) => (
-                    <option key={index} value={option.value}>
-                        {option.label}
-                    </option>
-                ))}
+                {options?.length > 0 ? (
+                    options.map((option) => (
+                        <option key={option.id} value={option.id}>
+                            {option.name}
+                        </option>
+                    ))
+                ) : (
+                    <option disabled>No items available</option>
+                )}
             </select>
 
             {error && (<div className="text-danger small">{error}</div>)}
 
-        </div>
+        </div >
     );
 };
 

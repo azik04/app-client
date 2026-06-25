@@ -1,269 +1,540 @@
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
-const ChatBot = () => {
-  const [lang, setLang] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [questions, setQuestions] = useState([]);
+const api = axios.create({
+  baseURL: "http://10.200.17.141:5103/api/ChatBot",
+});
+
+export default function ChatBot() {
   const [chat, setChat] = useState([]);
-  const [input, setInput] = useState("");
+  const [buttons, setButtons] = useState([]);
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const chatEndRef = useRef(null);
 
-  // auto scroll
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    loadMainMenu();
+  }, []);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+    });
   }, [chat, loading]);
 
-  // 1️⃣ SELECT LANGUAGE → LOAD CATEGORIES
-  const selectLanguage = async (lng) => {
-    setLang(lng);
-    setQuestions([]);
-    setChat([{ sender: "bot", text: "Language selected. Choose category or ask question." }]);
 
+  const loadMainMenu = async () => {
     try {
-      const res = await axios.get("http://10.200.17.141:5103/api/ChatBot", {
-        params: { lng },
+      setLoading(true);
+
+      const res = await api.post("", {
+        action: null,
+        message: null,
       });
 
-      setCategories(res.data || []);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  // 2️⃣ CLICK CATEGORY → LOAD QUESTIONS
-  const selectCategory = async (cat) => {
-    setChat((p) => [...p, { sender: "user", text: cat }]);
-
-    try {
-      const res = await axios.get("http://10.200.17.141:5103/api/ChatBot", {
-        params: {
-          lng: lang,
-          category: cat,
+      setChat([
+        {
+          sender: "bot",
+          text: res.data.message,
         },
-      });
-
-      setQuestions(res.data || []);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  // 3️⃣ CLICK QUESTION → GET ANSWER
-  const selectQuestion = async (q) => {
-    setChat((p) => [...p, { sender: "user", text: q }]);
-    setLoading(true);
-
-    try {
-      const res = await axios.get("http://10.200.17.141:5103/api/ChatBot", {
-        params: {
-          lng: lang,
-          question: q,
-        },
-      });
-
-      setChat((p) => [
-        ...p,
-        { sender: "bot", text: res.data?.answer || "No answer" },
       ]);
-    } catch (err) {
-      setChat((p) => [...p, { sender: "bot", text: "Error" }]);
+
+      setButtons(res.data.buttons || []);
+
+    } catch (error) {
+
+      console.error(error);
+
+      setChat([
+        {
+          sender: "bot",
+          text: "Server ilə əlaqə qurulmadı.",
+        },
+      ]);
+
     } finally {
       setLoading(false);
     }
   };
 
-  // 4️⃣ TYPE QUESTION DIRECTLY
-  const sendMessage = async () => {
-    if (!input.trim()) return;
 
-    const msg = input;
-    setInput("");
+  const handleAction = async (button) => {
 
-    setChat((p) => [...p, { sender: "user", text: msg }]);
-    setLoading(true);
+    setChat((prev) => [
+      ...prev,
+      {
+        sender: "user",
+        text: button.text,
+      },
+    ]);
+
 
     try {
-      const res = await axios.get("http://10.200.17.141:5103/api/ChatBot", {
-        params: {
-          lng: lang,
-          question: msg,
-        },
+
+      setLoading(true);
+
+
+      const res = await api.post("", {
+        action: button.id,
+        message: null,
       });
 
-      setChat((p) => [
-        ...p,
-        { sender: "bot", text: res.data?.answer || "No answer found" },
+
+      setChat((prev) => [
+        ...prev,
+        {
+          sender: "bot",
+          text: res.data.message,
+        },
       ]);
-    } catch (err) {
-      setChat((p) => [...p, { sender: "bot", text: "Server error" }]);
+
+
+      setButtons(res.data.buttons || []);
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      setChat((prev) => [
+        ...prev,
+        {
+          sender: "bot",
+          text: "Xəta baş verdi.",
+        },
+      ]);
+
     } finally {
       setLoading(false);
     }
   };
+
+
+
+  const handleSend = async () => {
+
+    if (!message.trim()) return;
+
+
+    const userText = message;
+
+
+    setChat((prev) => [
+      ...prev,
+      {
+        sender: "user",
+        text: userText,
+      },
+    ]);
+
+
+    setMessage("");
+
+
+    try {
+
+      setLoading(true);
+
+
+      const res = await api.post("", {
+        action: null,
+        message: userText,
+      });
+
+
+      setChat((prev) => [
+        ...prev,
+        {
+          sender: "bot",
+          text: res.data.message,
+        },
+      ]);
+
+
+      setButtons(res.data.buttons || []);
+
+
+
+    } catch(error){
+
+      console.error(error);
+
+
+      setChat((prev)=>[
+        ...prev,
+        {
+          sender:"bot",
+          text:"Xəta baş verdi."
+        }
+      ]);
+
+    }
+    finally{
+      setLoading(false);
+    }
+
+  };
+
+
 
   return (
+
     <div style={styles.page}>
+
+
       <div style={styles.container}>
 
-        {/* HEADER */}
-        <div style={styles.header}>ChatBot</div>
 
-        {/* LANGUAGE */}
-        {!lang && (
-          <div style={styles.langBox}>
-            <button onClick={() => selectLanguage("az")} style={styles.btn}>AZ</button>
-            <button onClick={() => selectLanguage("en")} style={styles.btn}>EN</button>
-            <button onClick={() => selectLanguage("ru")} style={styles.btn}>RU</button>
-          </div>
-        )}
-
-        {/* CATEGORIES */}
-        {categories.length > 0 && (
-          <div style={styles.box}>
-            {categories.map((c, i) => (
-              <button
-                key={i}
-                onClick={() => selectCategory(c)}
-                style={styles.item}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* QUESTIONS */}
-        {questions.length > 0 && (
-          <div style={styles.box}>
-            {questions.map((q, i) => (
-              <button
-                key={i}
-                onClick={() => selectQuestion(q.question)}
-                style={styles.item}
-              >
-                {q.question}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* CHAT */}
-        <div style={styles.chat}>
-          {chat.map((c, i) => (
-            <div
-              key={i}
-              style={{
-                textAlign: c.sender === "user" ? "right" : "left",
-                marginBottom: 6,
-              }}
-            >
-              <span
-                style={{
-                  display: "inline-block",
-                  padding: 8,
-                  borderRadius: 10,
-                  background: c.sender === "user" ? "#4f46e5" : "#e5e7eb",
-                  color: c.sender === "user" ? "white" : "black",
-                }}
-              >
-                {c.text}
-              </span>
-            </div>
-          ))}
-
-          {loading && <div>🤖 typing...</div>}
-          <div ref={chatEndRef} />
+        <div style={styles.header}>
+          ADRA Virtual Köməkçi
         </div>
 
-        {/* INPUT */}
-        {lang && (
-          <div style={styles.inputBox}>
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask question..."
-              style={styles.input}
-              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            />
-            <button onClick={sendMessage} style={styles.send}>
-              Send
-            </button>
+
+
+        <div style={styles.chat}>
+
+
+          {chat.map((item,index)=>(
+
+            <div
+              key={index}
+              style={{
+                textAlign:
+                  item.sender==="user"
+                  ? "right"
+                  : "left",
+
+                marginBottom:10,
+              }}
+            >
+
+
+              <span
+                style={{
+                  display:"inline-block",
+                  padding:"10px 14px",
+                  borderRadius:12,
+                  maxWidth:"85%",
+                  whiteSpace:"pre-wrap",
+
+                  background:
+                  item.sender==="user"
+                  ? "#4f46e5"
+                  : "#e5e7eb",
+
+
+                  color:
+                  item.sender==="user"
+                  ? "#fff"
+                  : "#111",
+                }}
+              >
+
+                {item.text}
+
+              </span>
+
+
+            </div>
+
+          ))}
+
+
+
+
+          {
+            loading &&
+            <div>
+              🤖 Yazır...
+            </div>
+          }
+
+
+
+          <div ref={chatEndRef}/>
+
+
+        </div>
+
+
+
+
+
+        <div style={styles.footer}>
+
+
+          <div style={styles.buttonsContainer}>
+
+
+            {
+              buttons.map((btn)=>(
+
+                <button
+
+                  key={btn.id}
+
+                  style={styles.button}
+
+                  onClick={()=>
+                    handleAction(btn)
+                  }
+
+                >
+
+                  {btn.text}
+
+
+                </button>
+
+              ))
+            }
+
+
           </div>
-        )}
+
+
+
+
+
+          <div style={styles.inputContainer}>
+
+
+            <input
+
+              value={message}
+
+              onChange={(e)=>
+                setMessage(e.target.value)
+              }
+
+
+              onKeyDown={(e)=>{
+
+                if(e.key==="Enter"){
+                  handleSend();
+                }
+
+              }}
+
+
+              placeholder="Sualınızı yazın..."
+
+              style={styles.input}
+
+            />
+
+
+
+            <button
+
+              onClick={handleSend}
+
+              style={styles.sendButton}
+
+            >
+
+              Göndər
+
+            </button>
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+
+
       </div>
+
+
     </div>
+
   );
-};
+}
+
+
+
+
+
 
 const styles = {
-  page: {
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: "#0f172a",
-  },
-  container: {
-    width: 420,
-    height: 700,
-    background: "white",
-    display: "flex",
-    flexDirection: "column",
-  },
-  header: {
-    padding: 10,
-    background: "#111827",
-    color: "white",
-    textAlign: "center",
-  },
-  langBox: {
-    display: "flex",
-    justifyContent: "center",
-    gap: 10,
-    padding: 10,
-  },
-  btn: {
-    padding: 10,
-    cursor: "pointer",
-  },
-  box: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: 6,
-    padding: 10,
-  },
-  item: {
-    padding: "5px 10px",
-    border: "1px solid #ccc",
-    borderRadius: 20,
-    cursor: "pointer",
-    fontSize: 12,
-  },
-  chat: {
-    flex: 1,
-    padding: 10,
-    overflowY: "auto",
-    background: "#f3f4f6",
-  },
-  inputBox: {
-    display: "flex",
-    padding: 10,
-    borderTop: "1px solid #ddd",
-  },
-  input: {
-    flex: 1,
-    padding: 8,
-  },
-  send: {
-    marginLeft: 6,
-    padding: "8px 12px",
-    background: "#111827",
-    color: "white",
-    border: "none",
-  },
-};
 
-export default ChatBot;
+
+page:{
+
+height:"100vh",
+
+background:"#0f172a",
+
+display:"flex",
+
+justifyContent:"center",
+
+alignItems:"center",
+
+},
+
+
+
+
+container:{
+
+width:450,
+
+height:750,
+
+background:"#fff",
+
+borderRadius:12,
+
+overflow:"hidden",
+
+display:"flex",
+
+flexDirection:"column",
+
+boxShadow:"0 10px 30px rgba(0,0,0,.25)"
+
+},
+
+
+
+
+header:{
+
+background:"#111827",
+
+color:"#fff",
+
+textAlign:"center",
+
+padding:15,
+
+fontWeight:600,
+
+fontSize:18,
+
+},
+
+
+
+
+chat:{
+
+flex:1,
+
+overflowY:"auto",
+
+padding:15,
+
+background:"#f3f4f6",
+
+},
+
+
+
+
+
+footer:{
+
+borderTop:"1px solid #ddd",
+
+background:"#fff",
+
+},
+
+
+
+
+buttonsContainer:{
+
+padding:10,
+
+display:"flex",
+
+flexWrap:"wrap",
+
+gap:8,
+
+},
+
+
+
+
+button:{
+
+border:"1px solid #d1d5db",
+
+background:"#fff",
+
+borderRadius:20,
+
+padding:"8px 12px",
+
+cursor:"pointer",
+
+fontSize:13,
+
+},
+
+
+
+
+inputContainer:{
+
+display:"flex",
+
+gap:8,
+
+padding:10,
+
+borderTop:"1px solid #ddd",
+
+},
+
+
+
+
+
+input:{
+
+flex:1,
+
+padding:"10px",
+
+border:"1px solid #d1d5db",
+
+borderRadius:8,
+
+fontSize:14,
+
+outline:"none",
+
+},
+
+
+
+
+sendButton:{
+
+background:"#4f46e5",
+
+color:"#fff",
+
+border:"none",
+
+borderRadius:8,
+
+padding:"10px 18px",
+
+cursor:"pointer",
+
+}
+
+};

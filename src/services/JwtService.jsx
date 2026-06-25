@@ -29,10 +29,17 @@ export function getClientId() {
     return decoded?.["ClientId"] || null;
 }
 
-export function getUserRole() {
+export function getWorkerId() {
     if (typeof window === 'undefined') return null;
     const decoded = getDecodedToken();
-    return decoded?.["role"] || null;
+    return decoded?.["WorkerId"] || null;
+}
+
+export function getUserRole() {
+    const token = getClientSideToken();
+    const decoded = getDecodedToken();
+
+    return decoded.Role;
 }
 
 export function getUserName() {

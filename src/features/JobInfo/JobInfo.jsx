@@ -1,43 +1,53 @@
 import { useParams } from "react-router-dom";
 import Map from "../../components/MapContainer/Map/Map";
 import api from "../../services/api";
-import Info from "./components/Info";
-import { useState } from "react";
+import Info from "./components/Info/Info";
+import { useEffect, useState } from "react";
+import History from "./components/History/History";
+import ActionButton from "./components/JobHeader/JobHeader";
+import MapReader from "./components/MapReader/MapReader";
+import JobHeader from "./components/JobHeader/JobHeader"
+import "./style.css"
 
 const JobInfo = () => {
-    const {jobId} = useParams();
+    const { jobId } = useParams();
     const [data, setData] = useState({});
+    const [location, setLocation] = useState({
+        lat: data.lat,
+        lng: data.lng
+    })
 
-    const fetchData = async() => {
+    const fetchData = async () => {
         const res = await api.get(`Job/id/${jobId}`)
-        fetchData(res.data.data)
+        setData(res.data.data)
     }
+
+    useEffect(() => {
+        if (data.lat && data.lng) {
+            setLocation({
+                lat: data.lat,
+                lng: data.lng
+            });
+        }
+    }, [data]);
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     return (
         <div className="container">
-            <Info data={data} />
+            
+            <JobHeader name={data.name} status={data.status}/>
 
-            <div className="row g-4">
+            <Info data={data} workerJob={data.workerJob} />
 
-                <div className="col-12 col-md-6">
-                    <div className="p-3 text-center bg-white rounded border">
-                        <h4 className="mb-3">Map</h4>
-                        <Map />
-                    </div>
-                </div>
 
-                <div className="col-12 col-md-6">
-                    <div className="p-3 text-center bg-white rounded border">
-                        <h4 className="mb-3">History</h4>
+            <div className="row g-3">
 
-                        <div className="bg-light p-2 border rounded">
-                            <p className="mb-2">14:44 receved by Azik Hacibalayev</p>
-                            <p className="mb-2">14:54 canceled by Azik Hacibalayev</p>
-                            <p className="mb-2">14:54 canceled by Azik Hacibalayev</p>
-                            <p className="mb-2">14:54 canceled by Azik Hacibalayev</p>
-                        </div>
-                    </div>
-                </div>
+                <MapReader location={location} />
+
+                <History workerJobHistory={data.workerJobHistory} />
 
             </div>
 

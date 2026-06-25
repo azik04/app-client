@@ -25,12 +25,13 @@ const Card = ({ data, fetchData }) => {
                         {userRole === "Worker" && (
                             <>
                                 <li>Fin: <b>{data.pin}</b></li>
-                                <li><b>{data.jobCount || 0}</b> Jobs</li>
-                                <li><b>{data.reviewCount || 0}</b> Reviews</li>
+                                <li>Jobs: <b>{data.historyCount || 0}</b> </li>
+                                <li>Reviews: <b>{data.reviewCount || 0}</b> </li>
+
                                 <li className="profile-tags">
-                                    <span>Plumbing</span>
-                                    <span>Electrical</span>
-                                    <span>Painting</span>
+                                    {data.service?.map((item, index) => (
+                                        <span key={index}> {item}</span>
+                                    ))}
                                 </li>
                             </>
                         )}
@@ -39,7 +40,7 @@ const Card = ({ data, fetchData }) => {
             </div>
 
             {updateUser && (
-                <PrimaryPop header="Create Address" onClose={() => setUpdateUser(false)}>
+                <PrimaryPop header="Edit User" onClose={() => setUpdateUser(false)}>
                     <UpdateUser onClose={() => setUpdateUser(false)} fetchData={fetchData} />
                 </PrimaryPop>
             )}

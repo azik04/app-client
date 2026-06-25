@@ -22,7 +22,7 @@ const SignIn = () => {
                 localStorage.setItem("accessToken", res.data.accessToken)
                 localStorage.setItem("refreshToken", res.data.refreshToken)
 
-                navigate("/profile")
+                navigate("/")
             }
         } catch (err) {
             setErrors(err.response.data?.errors)

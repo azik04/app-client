@@ -73,11 +73,11 @@ const UpdateUser = ({ onClose, fetchData }) => {
     return (
         <form onSubmit={update}>
             <div className="row">
-                <Input col="col-4" labelFor="name" label="Name" id="name" type="text" onChange={handleChange} value={form.name} name="name" placeholder="Enter your name" error="" />
+                <Input col="col-6 col-md-4" labelFor="name" label="Name" id="name" type="text" onChange={handleChange} value={form.name} name="name" placeholder="Enter your name" error="" />
 
-                <Input col="col-4" labelFor="surname" label="Surname" id="surname" type="text" onChange={handleChange} value={form.surname} name="surname" placeholder="Enter your surname" error="" />
+                <Input col="col-6 col-md-4" labelFor="surname" label="Surname" id="surname" type="text" onChange={handleChange} value={form.surname} name="surname" placeholder="Enter your surname" error="" />
 
-                <Input col="col-4" labelFor="phoneNumber" label="Phone Number" id="phoneNumber" type="text" onChange={handleChange} value={form.phoneNumber} name="phoneNumber" placeholder="Enter your Phone Number" error="" />
+                <Input col="col-6 col-md-4" labelFor="phoneNumber" label="Phone Number" id="phoneNumber" type="text" onChange={handleChange} value={form.phoneNumber} name="phoneNumber" placeholder="Enter your Phone Number" error="" />
 
                 <Input col="col-12" labelFor="file" label="Select the Photo" id="file" value={form.fileName} type="file" onChange={handleChange} name="file" placeholder="Enter your file" error="" />
                 <span>{}</span>

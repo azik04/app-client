@@ -15,7 +15,7 @@ const blueIcon = new L.Icon({
     shadowSize: [41, 41],
 });
 
-const Map = ({ location, setLocation }) => {
+const Map = ({ location, setLocation, method }) => {
     const [marker, setMarker] = useState(null)
     const [loading, setLoading] = useState(false)
 

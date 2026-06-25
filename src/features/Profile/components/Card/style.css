@@ -21,6 +21,17 @@
     gap: 1rem;
 }
 
+@media (max-width: 968px) {
+    .profile-header {
+        display: block;
+        text-align: center;
+    }
+
+    .profile-avatar {
+        margin-bottom: 0.5rem;
+    }
+}
+
 .profile-avatar {
     width: 200px;
     border-radius: 0.25rem;
@@ -30,13 +41,13 @@
 }
 
 .profile-main {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .profile-main li {
-  margin-bottom: 8px;
+    margin-bottom: 8px;
 }
 
 .profile-top {

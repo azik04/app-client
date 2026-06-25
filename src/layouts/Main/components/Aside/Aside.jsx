@@ -30,8 +30,8 @@ const Aside = () => {
             <div className="sidebar-logo text-center mb-3">LOGO</div>
 
             <ul className="sidebar-menu nav">
-                <li><NavLink to="." end className={`sidebar-link nav-link `}>Profile</NavLink></li>
-                <li><NavLink to="requests" end className={`sidebar-link nav-link `}>Requests</NavLink></li>
+                <li><NavLink to="" end className={`sidebar-link nav-link `}>Profile</NavLink></li>
+                <li><NavLink to="job" end className={`sidebar-link nav-link `}>Requests</NavLink></li>
                 <li><NavLink to="workers" end className={`sidebar-link nav-link `}>Workers</NavLink></li>
                 
                 {/* {userRole === "Admin" && (
