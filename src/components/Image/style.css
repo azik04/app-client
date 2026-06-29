@@ -1,0 +1,25 @@
+.primary-pop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; 
+    padding: 1rem;
+}
+
+.image__container {
+    overflow-y: auto;
+    padding: 1rem;
+    border-radius: 1.25rem;
+    background-color: white;
+    border: 1px solid #dee2e6;
+}
+
+.image__container img{
+    border-radius: 1.1rem;
+}

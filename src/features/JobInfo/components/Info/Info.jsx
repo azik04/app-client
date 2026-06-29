@@ -1,25 +1,27 @@
 import { useEffect, useState } from "react"
 import "./style.css"
+import Image from "../../../../components/Image/Image";
 
 const Info = ({ data, workerJob }) => {
+    const [image, setImage] = useState(false);
+    const [imageUrl, setImageUrl] = useState(null);
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        setImages(data.appFile);
+    }, [data]);
+
+    console.log(images);
     return (
 
         <div className="job-info bordered">
             <div className="job-info__gallery">
-                <img
-                    src={`http://10.200.17.141:5221${data.appFile?.[0]}`}
-                    alt=""
-                    className="job-info__main-image"
-                />
+                <img onClick={() => { setImage(true); setImageUrl(data.appFile?.[0]); }} src={`http://10.200.17.141:5221${data.appFile?.[0]}`} alt="main-photo" className="job-info__main-image" />
+
                 {data.appFile?.length > 1 && (
                     <div className="job-info__thumbnails">
                         {data.appFile.slice(1).map((item, index) => (
-                            <img
-                                key={index}
-                                src={`http://10.200.17.141:5221${item}`}
-                                alt={`job-info-${index}`}
-                                className="job-info__thumbnail"
-                            />
+                            <img key={index} src={`http://10.200.17.141:5221${item}`} alt={`job-info-${index}`} className="job-info__thumbnail"/>
                         ))}
                     </div>
                 )}
@@ -53,6 +55,13 @@ const Info = ({ data, workerJob }) => {
                     {data.description}
                 </div>
             </div>
+
+            {image && (
+                <Image
+                    image={imageUrl}
+                    onClose={() => setImage(false)}
+                />
+            )}
         </div>
     )
 }

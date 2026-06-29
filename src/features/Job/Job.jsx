@@ -24,11 +24,14 @@ const Job = () => {
                     link = `Job/service?serviceId=${serviceId}`;
                 }
             }
-            
+
             else if (request === 2) {
                 const appId = getUserId();
-
-                link = `Job/appId/${appId}/serviceId/${serviceId}`;
+                if (serviceId === null) {
+                    link = `Job/appId/${appId}?jobStatus=2`;
+                } else {
+                    link = `Job/appId/${appId}?serviceId=${serviceId}&jobStatus=2`;
+                }
             }
             else {
                 return;
