@@ -4,66 +4,118 @@ import Image from "../../../../components/Image/Image";
 
 const Info = ({ data, workerJob }) => {
     const [image, setImage] = useState(false);
-    const [imageUrl, setImageUrl] = useState(null);
     const [images, setImages] = useState([]);
+    const [mainImage, setMainImage] = useState("");
 
     useEffect(() => {
+        setMainImage(data.appFile?.[0])
         setImages(data.appFile);
     }, [data]);
 
-    console.log(images);
     return (
-
-        <div className="job-info bordered">
-            <div className="job-info__gallery">
-                <img onClick={() => { setImage(true); setImageUrl(data.appFile?.[0]); }} src={`http://10.200.17.141:5221${data.appFile?.[0]}`} alt="main-photo" className="job-info__main-image" />
+        <div className="job">
+            <div className="job__gallery">
+                <div className="job__main">
+                    <img
+                        src={`http://10.200.17.141:5221${mainImage}`}
+                        alt="Job"
+                        onClick={() => setImage(true)}
+                    />
+                </div>
 
                 {data.appFile?.length > 1 && (
-                    <div className="job-info__thumbnails">
-                        {data.appFile.slice(1).map((item, index) => (
-                            <img key={index} src={`http://10.200.17.141:5221${item}`} alt={`job-info-${index}`} className="job-info__thumbnail"/>
+                    <div className="job__thumbs">
+                        {data.appFile.map((item, index) => (
+                            <div className="job__thumb" key={index}>
+                                <img
+                                    src={`http://10.200.17.141:5221${item}`}
+                                    alt={`Job ${index + 1}`}
+                                    onClick={() => setMainImage(item)}
+                                />
+                            </div>
                         ))}
                     </div>
                 )}
             </div>
 
-            <div className="job-info__content">
+            <div className="job__body">
 
-                <div className="job-info__meta">
-                    <div className="job-info__item">
-                        <span>Client</span>
-                        <strong>{data.clientName}</strong>
-                    </div>
+                <div className="job__section">
+                    <h5 className="job__title">Client Information</h5>
 
-                    <div className="job-info__item">
-                        <span>Service</span>
-                        <strong>{data.serviceName}</strong>
-                    </div>
+                    <div className="job__row">
+                        <div className="job__item">
+                            <span className="job__label">Client</span>
+                            <strong className="job__value">
+                                {data.clientName}
+                            </strong>
+                        </div>
 
-                    <div className="job-info__item">
-                        <span>Contact</span>
-                        <strong>994505157710</strong>
-                    </div>
+                        <div className="job__item">
+                            <span className="job__label">Service</span>
+                            <strong className="job__value">
+                                {data.serviceName}
+                            </strong>
+                        </div>
 
-                    <div className="job-info__item">
-                        <span>Status</span>
-                        <strong>{data.status}</strong>
+                        <div className="job__item">
+                            <span className="job__label">Contact</span>
+                            <strong className="job__value">
+                                994505157710
+                            </strong>
+                        </div>
+
+                        <div className="job__item">
+                            <span className="job__label">Status</span>
+                            <strong className="job__value">
+                                {data.status}
+                            </strong>
+                        </div>
                     </div>
                 </div>
 
-                <div className="job-info__description">
+                {data.status !== "Active" && data.workerJob && (
+                    <div className="job__section">
+                        <h5 className="job__title">Worker Information</h5>
+
+                        <div className="job__row">
+                            <div className="job__item">
+                                <span className="job__label">Worker</span>
+                                <strong className="job__value">
+                                    {data.workerJob.workerName}
+                                </strong>
+                            </div>
+
+                            <div className="job__item">
+                                <span className="job__label">Handled At</span>
+                                <strong className="job__value">
+                                    {data.workerJob.createAt}
+                                </strong>
+                            </div>
+
+                            <div className="job__item">
+                                <span className="job__label">Status</span>
+                                <strong className="job__value">
+                                    {data.workerJob.status}
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                <div className="job__description">
                     {data.description}
                 </div>
             </div>
 
             {image && (
                 <Image
-                    image={imageUrl}
+                    image={mainImage}
                     onClose={() => setImage(false)}
                 />
             )}
         </div>
-    )
+    );
 }
 
 export default Info;

@@ -5,16 +5,19 @@ import { getClientId, getUserId } from "../../../../services/JwtService";
 import api from "../../../../services/api";
 import Select from "../../../../components/Select/Select";
 import Textarea from "../../../../components/TextArea/Textarea";
+import "./style.css"
 
 const JobForm = ({ onClose }) => {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState([]);
+
     const [addressId, setAddressId] = useState(0);
     const [serviceId, setServiceId] = useState(0);
     const [addressList, setAddressList] = useState([]);
     const [serviceList, setServiceList] = useState([]);
     const [error, setError] = useState({});
+
 
     const fetchAddress = async () => {
         const appId = getUserId();
@@ -40,7 +43,9 @@ const JobForm = ({ onClose }) => {
         const formData = new FormData();
         formData.append("name", name)
         formData.append("description", description)
-        formData.append("file", file)
+        file.forEach((item) => {
+            formData.append("file", item);
+        });
         formData.append("serviceId", serviceId)
         formData.append("addressId", addressId)
         formData.append("clientId", clientId)
@@ -60,9 +65,9 @@ const JobForm = ({ onClose }) => {
     return (
         <form onSubmit={submit}>
             <div className="row">
-                <Input col="col-6" labelFor="name" label="Name" id="name" type="text" onChange={e => setName(e.target.value)} value={name} name="name" placeholder="Enter your name" error={error.Name?.[0]}/>
+                <Input col="col-6" labelFor="name" label="Name" id="name" type="text" onChange={e => setName(e.target.value)} value={name} name="name" placeholder="Enter your name" error={error.Name?.[0]} />
 
-                <Input col="col-6" labelFor="name" label="Name" id="name" type="file" onChange={e => setFile(e.target.files[0])} name="file" error={error.file?.[0]} />
+                <Input col="col-6" labelFor="name" label="Name" id="name" type="file" multiple onChange={e => setFile(Array.from(e.target.files))} name="file" error={error.file?.[0]} />
 
                 <Select col="col-6" label="Address" id="address" value={addressId} name="addressId" onChange={e => setAddressId(e.target.value)} options={addressList} />
 
@@ -71,6 +76,25 @@ const JobForm = ({ onClose }) => {
                 <Textarea col="col-12" label="Description" id="description" value={description} name="description" onChange={e => setDescription(e.target.value)} placeholder="Enter your description" />
             </div>
 
+            <div className="form-image">
+                {file.map((item, index) => (
+                    <div className="col-4 col-md-3 p-2" key={index}>
+                        <div className="form-image__card">
+                            <button
+                                type="button"
+                                className="remove-btn"
+                                onClick={() => {
+                                    setFile(file.filter((_, i) => i !== index));
+                                }}
+                            >
+                                ×
+                            </button>
+                            <img src={URL.createObjectURL(item)} alt={`new-job-image-${index}`} />
+                            <p>{item.name}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
             <DialogButton onClose={onClose} />
         </form>
     )

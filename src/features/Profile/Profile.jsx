@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Card from "./components/Card/Card";
 import AddressList from "./components/AddressList/AddressList";
 import History from "./components/History/History";
+import { useParams } from "react-router-dom";
 
 const Profile = () => {
     const [data, setData] = useState({});

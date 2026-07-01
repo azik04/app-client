@@ -38,7 +38,7 @@ const JobInfo = () => {
     return (
         <div className="container">
             
-            <JobHeader name={data.name} status={data.status}/>
+            <JobHeader fetchData={fetchData} name={data.name} status={data.status}/>
 
             <Info data={data} workerJob={data.workerJob} />
 

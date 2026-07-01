@@ -18,7 +18,7 @@ const ActionButton = ({ fetchData, name, status }) => {
             workerJobStatus
         })
 
-        if (res.data.data === true) {
+        if (res.data.success === true) {
             fetchData()
         }
     }

@@ -32,14 +32,14 @@ const Aside = () => {
             <ul className="sidebar-menu nav">
                 <li><NavLink to="" end className={`sidebar-link nav-link `}>Profile</NavLink></li>
                 <li><NavLink to="job" end className={`sidebar-link nav-link `}>Requests</NavLink></li>
-                <li><NavLink to="workers" end className={`sidebar-link nav-link `}>Workers</NavLink></li>
+                <li><NavLink to="worker" end className={`sidebar-link nav-link `}>Workers</NavLink></li>
                 
-                {/* {userRole === "Admin" && (
-                    <> */}
+                {userRole === "Admin" && (
+                    <> 
                         <li><NavLink to="admin" end className="sidebar-link nav-link">Admin</NavLink></li>
                         <li><NavLink to="admin/statistics" end className="sidebar-link nav-link">Statistics</NavLink></li>
-                    {/* </>
-                )} */}
+                    </>
+                )}
 
                 <li><button onClick={signOut} className="sidebar-link nav-link w-100 text-start">Sign out</button></li>
             </ul>

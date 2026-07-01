@@ -10,8 +10,7 @@ const History = () => {
     const appId = getUserId();
 
     const fetchData = async() => {
-
-        const res = await api.get(`Job/appId/${appId}/serviceId/1`);
+        const res = await api.get(`Job/appId/${appId}?jobStatus=3`);
         setData(res.data.data)
     }
 

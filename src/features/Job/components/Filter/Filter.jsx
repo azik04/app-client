@@ -23,13 +23,11 @@ const Filter = ({setServiceId, serviceName}) => {
     return (
         <div className="filter mb-4">
             <div className="row">
-                <Select col="col-6 col-md-4 col-lg-3" label="Service" id="service" onChange={(e) => setServiceId(e.target.value)} name="service" options={serviceData} value={serviceName}/>
+                <Select col="col-6 col-md-4" label="Service" id="service" onChange={(e) => setServiceId(e.target.value)} name="service" options={serviceData} value={serviceName}/>
 
-                <Input col="col-6 col-md-4 col-lg-3" labelFor="name" label="Name" id="name" type="text" name="name" placeholder="Enter your name" error="" />
+                <Input col="col-6 col-md-4" labelFor="name" label="Name" id="name" type="text" name="name" placeholder="Enter your name" error="" />
 
-                <Input col="col-6 col-md-4 col-lg-3" labelFor="name" label="Name" id="name" type="text" name="name" placeholder="Enter your name" error="" />
-
-                <Input col="col-6 col-md-4 col-lg-3" labelFor="name" label="Name" id="name" type="text" name="name" placeholder="Enter your name" error="" />
+                <Input col="col-6 col-md-4" labelFor="name" label="Name" id="name" type="text" name="name" placeholder="Enter your name" error="" />
             </div>
         </div>
     );

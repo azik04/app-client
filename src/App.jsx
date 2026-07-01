@@ -15,6 +15,7 @@ import Admin from "./features/Admin/Admin";
 import ChatBot from "./features/Bot";
 import Job from "./features/Job/Job";
 import JobInfo from "./features/JobInfo/JobInfo";
+import Worker from "./features/Worker/Worker";
 
 const App = () => {
     return (
@@ -37,9 +38,11 @@ const App = () => {
 
                 <Route path="/" element={<MainLayout />}>
                     <Route index element={<Profile />} />
-                    <Route path="/Admin" element={<Admin />} />
-                    <Route path="/Job" element={<Job />} />
-                    <Route path="/Job/:jobId" element={<JobInfo />} />
+                    <Route path="/admin" element={<Admin />} />
+                    <Route path="/job" element={<Job />} />
+                    <Route path="/job/:jobId" element={<JobInfo />} />
+                    <Route path="/worker" element={<Worker />} />
+                    <Route path="/worker/:workerId" element={<Worker />} />
                 </Route>
 
                 <Route path="*" element={<NotFound />} />

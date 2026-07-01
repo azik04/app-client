@@ -1,6 +1,5 @@
 import { useState } from "react"
 import api from "../../../../services/api"
-import Input from "../../../../components/Input/Input"
 import Textarea from "../../../../components/TextArea/Textarea"
 
 const ContactUs = () => {
